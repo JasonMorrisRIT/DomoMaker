@@ -11,6 +11,7 @@ const signupPage = (req, res) => {
 };
 
 const logout = (req, res) => {
+  req.session.destroy();
   res.redirect('/');
 };
 
@@ -29,8 +30,10 @@ const login = (request, response) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password' });
     }
+
+    req.session.account = Account.AccountModel.toAPI(account);
     return res.json({ redirect: '/maker' });
-  }); 
+  });
 };
 
 const signup = (request, response) => {
@@ -60,9 +63,10 @@ const signup = (request, response) => {
         return res.status(400).json({ error: 'An error occured! Please turn off your Nintendo Gamecube and consult your instruction manual' });
       }
 
+      req.session.account = Account.AccountModel.toAPI(newAccount);
       return res.json({ redirect: '/maker' });
     });
-  }); 
+  });
 };
 
 module.exports.loginPage = loginPage;
