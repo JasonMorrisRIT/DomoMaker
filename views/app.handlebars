@@ -19,6 +19,12 @@
 			<input type="hidden" name=_csrf value={{csrfToken}} />
       <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
     </form>
+		<form id="domoChildForm" nameC="domoChildForm" action="/childMaker" method="POST" class="domoForm">
+      <label for="nameC">Parent's Name: </label>
+      <input id="domoChildName" type="text" name="nameC" placeholder="Domo Name"/>
+			<input type="hidden" name=_csrf value={{csrfToken}} />
+      <a id="makeDomoChildSubmit" href="#" class="makeDomoSubmit">Make Child Domo</a>
+    </form>
   </section>
   <section id="domos">
     <div class="domo">

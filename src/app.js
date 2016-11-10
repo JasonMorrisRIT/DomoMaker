@@ -53,9 +53,9 @@ app.use(session({
   secret: 'Domo Arigato',
   resave: true,
   saveUninitialized: true,
-	cookie: {
-		httpOnly: true,
-	}
+  cookie: {
+    httpOnly: true,
+  },
 }));
 app.engine('handlebars', expressHandlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
@@ -66,9 +66,9 @@ app.use(cookieParser());
 
 app.use(csrf());
 app.use((err, req, res, next) => {
-	if (err.code !== 'EBADCSRFTOKEN') return next(err);
-	
-	return false;
+  if (err.code !== 'EBADCSRFTOKEN') return next(err);
+
+  return false;
 });
 
 router(app);

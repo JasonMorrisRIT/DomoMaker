@@ -35,6 +35,31 @@ const makeDomo = (req, res) => {
   });
 };
 
+const makeChildDomo = (req, res) => {
+ // let foundName;
+
+  if (!req.body.name) {
+    return res.status(400).json({ error: 'RAWR! Who is my parent! >_<' });
+  }
+
+  Domo.DomoModel.findOneAndUpdate({ name: res.body.nameC }, { $set: { name: `${req.body.nameC} jr.` } }, { new: true }, (err, result) => {
+    if (err) {
+      return res.status(400).json({ error: 'RAWR! That Domo is not here!' });
+    }
+    const newDomo = new Domo.DomoModel(result);
+
+    return newDomo.save((erro) => {
+      if (erro) {
+        console.log(erro);
+        return res.status(400).json({ error: 'An error occurred' });
+      }
+      return res.json({ redirect: '/maker' });
+    });
+  });
+  return res.json({ redirect: '/maker' });
+};
+
 
 module.exports.makerPage = makerPage;
 module.exports.make = makeDomo;
+module.exports.makeChild = makeChildDomo;

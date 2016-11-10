@@ -39,5 +39,20 @@ $(document).ready(function() {
         
         return false;
     });
+	
+	$("#makeDomoChildSubmit").on("click", (e) => {
+        e.preventDefault();
+    
+        $("#domoMessage").animate({width:'hide'},350);
+    
+        if($("#domoChildName").val() == '') {
+            handleError("RAWR! I need a name!");
+            return false;
+        }
+
+        sendAjax($("#domoChildForm").attr("action"), $("#domoChildForm").serialize());
+        
+        return false;
+    });
     
 });
