@@ -11,30 +11,17 @@
     <div class="navlink"><a href="/logout">Log out</a></div>
 		<div class="navlink"><a href="/world">World Page</a></div>
   </nav>
-  <section id="makeDomo">
-    <form id="domoForm" name="domoForm" action="/maker" method="POST" class="domoForm">
-      <label for="name">Name: </label>
-      <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-      <label for="age">Age: </label>
-      <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-			<input type="hidden" name=_csrf value={{csrfToken}} />
-      <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
-    </form>
-		<form id="domoChildForm" nameC="domoChildForm" action="/childMaker" method="POST" class="domoForm">
-      <label for="nameC">Parent's Name: </label>
-      <input id="domoChildName" type="text" name="nameC" placeholder="Domo Name"/>
-			<input type="hidden" name=_csrf value={{csrfToken}} />
-      <a id="makeDomoChildSubmit" href="#" class="makeDomoSubmit">Make Child Domo</a>
-    </form>
-  </section>
+  
   <section id="domos">
     <div class="domo">
+			<h1> The Domo World!</h1>
 			
 			{{#if domos}}
 			{{#each domos}}
 			<div class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
 				<h3 class="domoName">Name: {{this.name}}</h3>
 				<h3 class="domoAge"> Age: {{this.age}}</h3>
+				<h4 class="domoDate"> Date Joined: {{this.createdData}}</h4>
 			</div>
 			{{/each}}
 			{{else}}
