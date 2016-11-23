@@ -17,7 +17,7 @@
       <label for="nameP">Name: </label>
       <input id="domoName" type="text" name="nameP" placeholder="Search Pokemon"/>
 			<input type="hidden" name=_csrf value={{csrfToken}} />
-      <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
+      <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Add to Party</a>
     </form>
 		<!--<form id="domoChildForm" nameC="domoChildForm" action="/childMaker" method="POST" class="domoForm">
       <label for="nameC">Parent's Name: </label>
@@ -31,7 +31,7 @@
 			
 			{{#if domos}}
 			{{#each domos}}
-			<div class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
+			<div class="domo"><img src="/assets/img/{{this.path}}" alt="domo face" class="domoFace"/>
 				<h3 class="domoName">Name: {{this.name}}</h3>
 				<h3 class="domoAge"> Wins: {{this.wins}}</h3>
 			</div>
