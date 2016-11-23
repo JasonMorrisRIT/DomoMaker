@@ -9,8 +9,9 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/maker', mid.requiresLogin, controllers.Domo.makerPage);
   app.get('/world', mid.requiresLogin, controllers.Domo.worldPage);
-  app.post('/maker', mid.requiresLogin, controllers.Domo.make);
-  app.post('/childMaker', mid.requiresLogin, controllers.Domo.makeChild);
+  app.get('/battle', mid.requiresLogin, controllers.Domo.battlePage);
+  app.post('/maker', mid.requiresLogin, controllers.Domo.addPoke);
+  // app.post('/childMaker', mid.requiresLogin, controllers.Domo.makeChild);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 

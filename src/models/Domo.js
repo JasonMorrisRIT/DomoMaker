@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const random = require('mongoose-random');
 
 mongoose.Promise = global.Promise;
 
@@ -16,14 +17,19 @@ const DomoSchema = new mongoose.Schema({
     trim: true,
     set: setName,
   },
-  age: {
+  wins: {
     type: Number,
     min: 0,
     required: true,
   },
+  path: {
+    type: String,
+    required: true,
+    trim: true,
+    //set: setPath,
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
-    required: true,
     ref: 'Account',
   },
   createdData: {
@@ -34,17 +40,22 @@ const DomoSchema = new mongoose.Schema({
 
 DomoSchema.statics.toAPI = doc => ({
   name: doc.name,
-  age: doc.age,
+  wins: doc.wins,
+  path: doc.path,
 });
+
+/* DomoSchema.statics.syncRandom((err, result) => {
+  console.log(result.updated);
+}); */
 
 DomoSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
   };
-  return DomoModel.find(search).select('name age').exec(callback);
+  return DomoModel.find(search).select('name wins path').exec(callback);
 };
 
-
+DomoSchema.plugin(random, { path: 'r' });
 DomoModel = mongoose.model('Domo', DomoSchema);
 
 

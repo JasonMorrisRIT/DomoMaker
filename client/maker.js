@@ -30,8 +30,8 @@ $(document).ready(function() {
     
         $("#domoMessage").animate({width:'hide'},350);
     
-        if($("#domoName").val() == '' || $("#domoAge").val() == '') {
-            handleError("RAWR! All fields are required");
+        if($("#domoName").val() == '') {
+            handleError("There is a time and place for all fields that are required");
             return false;
         }
 
@@ -40,19 +40,19 @@ $(document).ready(function() {
         return false;
     });
 	
-	$("#makeDomoChildSubmit").on("click", (e) => {
+/*	$("#makeDomoChildSubmit").on("click", (e) => {
         e.preventDefault();
     
         $("#domoMessage").animate({width:'hide'},350);
     
         if($("#domoChildName").val() == '') {
-            handleError("RAWR! I need a name!");
+            handleError("Ahh? What was your name again");
             return false;
         }
 
         sendAjax($("#domoChildForm").attr("action"), $("#domoChildForm").serialize());
         
         return false;
-    });
+    }); */
     
 });

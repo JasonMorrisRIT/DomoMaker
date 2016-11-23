@@ -170,7 +170,7 @@ nav:nth-child(1) {
 }
 
 #speech {
-    height: 120px;
+    height: 200px;
     width: 250px;
     z-index:300;
 }

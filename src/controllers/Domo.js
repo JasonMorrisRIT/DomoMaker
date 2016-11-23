@@ -1,5 +1,6 @@
 const models = require('../models');
 
+
 const Domo = models.Domo;
 
 const makerPage = (req, res) => {
@@ -9,6 +10,37 @@ const makerPage = (req, res) => {
       return res.status(400).json({ error: 'An error occurred' });
     }
     return res.render('app', { csrfToken: req.csrfToken(), domos: docs });
+  });
+  // res.render('app');
+};
+
+const battlePage = (req, res) => {
+ // Domo.DomoModel.findByOwner(req.session.account._id)/*.limit(6)*/.exec((erro, yTeam) => {
+  Domo.DomoModel.findByOwner(req.session.account._id).exec((erro, yTeamDocs) => {
+    if (erro) {
+      console.log(erro);
+      return res.status(400).json({ error: 'An error occurred' });
+    }
+
+    let yTeam = yTeamDocs;
+    if (yTeam.length > 6) {
+      yTeam = yTeam.slice(0, 6);
+    }
+
+    return Domo.DomoModel.findRandom()/* .limit(6)*/.exec((err, tTeamDocs) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: 'An error occurred' });
+      }
+
+      let tTeam = tTeamDocs;
+      if (tTeam.length > 6) {
+        tTeam = tTeam.slice(0, 6);
+      }
+
+
+      return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam });
+    });
   });
   // res.render('app');
 };
@@ -31,7 +63,7 @@ const makeDomo = (req, res) => {
 
   const domoData = {
     name: req.body.name,
-    age: req.body.age,
+    wins: req.body.age,
     owner: req.session.account._id,
   };
 
@@ -43,6 +75,34 @@ const makeDomo = (req, res) => {
       return res.status(400).json({ error: 'An error occurred' });
     }
     return res.json({ redirect: '/maker' });
+  });
+};
+
+const addPoke = (req, res) => {
+  if (!req.body.nameP) {
+    return res.status(400).json({ error: 'Whats your name again?' });
+  }
+
+  return Domo.DomoModel.findOne({ name: req.body.nameP }, (erro, result) => {
+    if (erro) {
+      return res.status(400).json({ error: 'That pokemon is not in my pokedex' });
+    }
+    const domoData = {
+      name: result.name,
+      wins: 0,
+      path: result.path,
+      owner: req.session.account._id,
+    };
+
+    const newDomo = new Domo.DomoModel(domoData);
+
+    return newDomo.save((error) => {
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ error: 'An error occurred' });
+      }
+      return res.json({ redirect: '/maker' });
+    });
   });
 };
 
@@ -71,8 +131,9 @@ const makeChildDomo = (req, res) => {
   // return res.json({ redirect: '/maker' });
 };
 
-
+module.exports.addPoke = addPoke;
 module.exports.makerPage = makerPage;
 module.exports.worldPage = worldPage;
+module.exports.battlePage = battlePage;
 module.exports.make = makeDomo;
 module.exports.makeChild = makeChildDomo;

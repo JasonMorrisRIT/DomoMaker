@@ -23,12 +23,12 @@ const login = (request, response) => {
   const password = `${req.body.pass}`;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'There is a time and place for all fields that are required' });
   }
 
   return Account.AccountModel.authenticate(username, password, (err, account) => {
     if (err || !account) {
-      return res.status(401).json({ error: 'Wrong username or password' });
+      return res.status(401).json({ error: 'That seems to be wrong' });
     }
 
     req.session.account = Account.AccountModel.toAPI(account);
@@ -41,11 +41,11 @@ const signup = (request, response) => {
   const res = response;
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'There is a time and place for all fields that are required' });
   }
 
   if (req.body.pass !== req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! Passwords do not match' });
+    return res.status(400).json({ error: 'Hmm, that password seems wrong' });
   }
 
   return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => {

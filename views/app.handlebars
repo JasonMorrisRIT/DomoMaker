@@ -7,25 +7,24 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+  <nav><a href="/login"><img id="logo" src="/assets/img/ball.png" alt="face logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
-		<div class="navlink"><a href="/world">World Page</a></div>
+		<div class="navlink"><a href="/world">PC</a></div>
+		<div class="navlink"><a href="/battle">Battle!</a></div>
   </nav>
   <section id="makeDomo">
     <form id="domoForm" name="domoForm" action="/maker" method="POST" class="domoForm">
-      <label for="name">Name: </label>
-      <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-      <label for="age">Age: </label>
-      <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
+      <label for="nameP">Name: </label>
+      <input id="domoName" type="text" name="nameP" placeholder="Search Pokemon"/>
 			<input type="hidden" name=_csrf value={{csrfToken}} />
       <a id="makeDomoSubmit" href="#" class="makeDomoSubmit">Make Domo</a>
     </form>
-		<form id="domoChildForm" nameC="domoChildForm" action="/childMaker" method="POST" class="domoForm">
+		<!--<form id="domoChildForm" nameC="domoChildForm" action="/childMaker" method="POST" class="domoForm">
       <label for="nameC">Parent's Name: </label>
       <input id="domoChildName" type="text" name="nameC" placeholder="Domo Name"/>
 			<input type="hidden" name=_csrf value={{csrfToken}} />
       <a id="makeDomoChildSubmit" href="#" class="makeDomoSubmit">Make Child Domo</a>
-    </form>
+    </form> -->
   </section>
   <section id="domos">
     <div class="domo">
@@ -34,17 +33,17 @@
 			{{#each domos}}
 			<div class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
 				<h3 class="domoName">Name: {{this.name}}</h3>
-				<h3 class="domoAge"> Age: {{this.age}}</h3>
+				<h3 class="domoAge"> Wins: {{this.wins}}</h3>
 			</div>
 			{{/each}}
 			{{else}}
-			<h3 class="emptyDomo">No Domos yet</h3>
+			<h3 class="emptyDomo">No Pokes yet</h3>
 			{{/if}}	
 			
     </div>
   </section>
   <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
+    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/oak.png" alt="domo"/>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script src="/assets/maker.js" type="text/babel"></script>

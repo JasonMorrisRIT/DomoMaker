@@ -31,12 +31,12 @@ $(document).ready(() => {
         $("#domoMessage").animate({width:'hide'},350);
     
         if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-            handleError("RAWR! All fields are required");
+            handleError("There is a time and place for all fields that are required");
             return false;
         }
         
         if($("#pass").val() !== $("#pass2").val()) {
-            handleError("RAWR! Passwords do not match");
+            handleError("There is a time and place for Passwords that need to match");
             return false;           
         }
 
@@ -51,7 +51,7 @@ $(document).ready(() => {
         $("#domoMessage").animate({width:'hide'},350);
     
         if($("#user").val() == '' || $("#pass").val() == '') {
-            handleError("RAWR! Username or password is empty");
+            handleError("There is a time and place for the Username or password");
             return false;
         }
     
