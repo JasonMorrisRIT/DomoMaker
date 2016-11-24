@@ -43,11 +43,11 @@ const battlePage = (req, res) => {
 
   if (winner > 5) {
     for (let i = 0; i < tTeam.length; i++) {
-      tTeam[i].update({}, { $set: { wins: this.wins + 1 } });
+      tTeam[i].update({}, { $set: { wins: tTeam[i].wins + 1 } });
     }
   } else {
     for (let i = 0; i < yTeam.length; i++) {
-      yTeam[i].update({}, { $set: { wins: this.wins + 1 } });
+      yTeam[i].update({}, { $set: { wins: yTeam[i].wins + 1 } });
     }
   }
 
