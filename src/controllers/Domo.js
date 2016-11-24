@@ -37,6 +37,22 @@ const battlePage = (req, res) => {
       if (tTeam.length > 6) {
         tTeam = tTeam.slice(0, 6);
       }
+			
+			let winner = Math.floor((Math.random() * 10) + 1);
+			
+			if (winner > 5)
+				{
+					for each (let poke in tTeam)
+					{
+						poke.update({}, {$set: { wins: this.wins + 1}});
+					}
+				} else
+					{
+						for each (let poke in yTeam)
+						{
+							poke.update({}, {$set: { wins: this.wins + 1}});
+						}
+					}
 
 
       return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam });
