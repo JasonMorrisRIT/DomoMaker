@@ -87,6 +87,11 @@ const addPoke = (req, res) => {
     if (erro) {
       return res.status(400).json({ error: 'That pokemon is not in my pokedex' });
     }
+		
+		if(result == null)
+			{
+				return res.status(400).json({ error: 'Is that a Pokemon?'});
+			}
     const domoData = {
       name: result.name,
       wins: 0,
