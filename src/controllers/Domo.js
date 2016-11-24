@@ -40,21 +40,50 @@ const battlePage = (req, res) => {
   }
 
   const winner = Math.floor((Math.random() * 10) + 1);
-	let text = '';
+  let text = '';
 
   if (winner > 5) {
-		text = "You lost the battle!";
+    text = 'You lost the battle!';
     for (let i = 0; i < tTeam.length; i++) {
-      Domo.DomoModel.update({_id: tTeam[i]._id}, { $set: { wins: tTeam[i].wins + 1 } });
+      // Domo.DomoModel.update({ _id: tTeam[i]._id }, { $set: { wins: tTeam[i].wins + 1 } });
+      return Domo.DomoModel.findOneAndUpdate({ _id: tTeam[i]._id }, { $set: { wins: tTeam[i].wins + 1 } }, { new: true }, (er, result) => {
+        if (er) {
+          return res.status(400).json({ error: 'Error updating wins' });
+        }
+        const newDomo = new Domo.DomoModel(result);
+        console.dir(newDomo);
+
+        return newDomo.save((e) => {
+          if (e) {
+            console.log(e);
+            return res.status(400).json({ error: 'An error occurred. Please reinsert your NES cartridge' });
+          }
+          return true;
+        });
+      });
     }
   } else {
-		text = "You won the battle!";
+    text = 'You won the battle!';
     for (let i = 0; i < yTeam.length; i++) {
-      Domo.DomoModel.update({_id: yTeam[i]._id}, { $set: { wins: yTeam[i].wins + 1 } });
+      // Domo.DomoModel.update({ _id: yTeam[i]._id }, { $set: { wins: yTeam[i].wins + 1 } });
+      return Domo.DomoModel.findOneAndUpdate({ _id: yTeam[i]._id }, { $set: { wins: yTeam[i].wins + 1 } }, { new: true }, (er, result) => {
+        if (er) {
+          return res.status(400).json({ error: 'Error updating wins' });
+        }
+        const newDomo = new Domo.DomoModel(result);
+        console.dir(newDomo);
+
+        return newDomo.save((e) => {
+          if (e) {
+            console.log(e);
+            return res.status(400).json({ error: 'An error occurred. Please reinsert your NES cartridge' });
+          }
+          return true;
+        });
+      });
     }
   }
 
-			
 
   return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam, text });
 });
