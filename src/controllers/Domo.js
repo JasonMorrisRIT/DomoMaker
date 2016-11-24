@@ -27,7 +27,7 @@ const battlePage = (req, res) => {
       yTeam = yTeam.slice(0, 6);
     }
 
-    return Domo.DomoModel.findRandom()/* .limit(6)*/.exec((err, tTeamDocs) => {
+    return Domo.DomoModel.findRandom({ owner: { $ne: req.session.account._id } })/* .limit(6)*/.exec((err, tTeamDocs) => {
       if (err) {
         console.log(err);
         return res.status(400).json({ error: 'An error occurred' });
