@@ -40,19 +40,23 @@ const battlePage = (req, res) => {
   }
 
   const winner = Math.floor((Math.random() * 10) + 1);
+	let text = '';
 
   if (winner > 5) {
+		text = "You lost the battle!";
     for (let i = 0; i < tTeam.length; i++) {
       tTeam[i].update({}, { $set: { wins: tTeam[i].wins + 1 } });
     }
   } else {
+		text = "You won the battle!";
     for (let i = 0; i < yTeam.length; i++) {
       yTeam[i].update({}, { $set: { wins: yTeam[i].wins + 1 } });
     }
   }
 
+			
 
-  return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam });
+  return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam, text });
 });
   });
   // res.render('app');
