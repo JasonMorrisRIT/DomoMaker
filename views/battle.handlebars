@@ -11,6 +11,7 @@
   <nav><a href="/login"><img id="logo" src="/assets/img/ball.png" alt="face logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
 		<div class="navlink"><a href="/world">World Page</a></div>
+		<div class="navlink"><a href="/battle">Battle!</a></div>
   </nav>
   
   <section id="domos">
@@ -29,6 +30,8 @@
 			{{/if}}	
 			
 			<h1>Your Team!</h1>
+
+			
 			{{#if yTeam}}
 			{{#each yTeam}}
 			<div class="domo"><img src="/assets/img/{{this.path}}" alt="domo face" class="domoFace"/>
