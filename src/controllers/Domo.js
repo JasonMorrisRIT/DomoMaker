@@ -27,36 +27,33 @@ const battlePage = (req, res) => {
       yTeam = yTeam.slice(0, 6);
     }
 
-    return Domo.DomoModel.findRandom({ owner: { $ne: req.session.account._id } })/* .limit(6)*/.exec((err, tTeamDocs) => {
-      if (err) {
-        console.log(err);
-        return res.status(400).json({ error: 'An error occurred' });
-      }
+    return Domo.DomoModel.findRandom(
+			{ owner: { $ne: req.session.account._id } })/* .limit(6)*/.exec((err, tTeamDocs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred' });
+  }
 
-      let tTeam = tTeamDocs;
-      if (tTeam.length > 6) {
-        tTeam = tTeam.slice(0, 6);
-      }
-			
-			let winner = Math.floor((Math.random() * 10) + 1);
-			
-			if (winner > 5)
-				{
-					for each (let poke in tTeam)
-					{
-						poke.update({}, {$set: { wins: this.wins + 1}});
-					}
-				} else
-					{
-						for each (let poke in yTeam)
-						{
-							poke.update({}, {$set: { wins: this.wins + 1}});
-						}
-					}
+  let tTeam = tTeamDocs;
+  if (tTeam.length > 6) {
+    tTeam = tTeam.slice(0, 6);
+  }
+
+  const winner = Math.floor((Math.random() * 10) + 1);
+
+  if (winner > 5) {
+    for (let i = 0; i < tTeam.length; i++) {
+      tTeam[i].update({}, { $set: { wins: this.wins + 1 } });
+    }
+  } else {
+    for (let i = 0; i < yTeam.length; i++) {
+      yTeam[i].update({}, { $set: { wins: this.wins + 1 } });
+    }
+  }
 
 
-      return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam });
-    });
+  return res.render('battle', { csrfToken: req.csrfToken(), yTeam, tTeam });
+});
   });
   // res.render('app');
 };
@@ -103,11 +100,10 @@ const addPoke = (req, res) => {
     if (erro) {
       return res.status(400).json({ error: 'That pokemon is not in my pokedex' });
     }
-		
-		if(result == null)
-			{
-				return res.status(400).json({ error: 'Is that a Pokemon?'});
-			}
+
+    if (result == null) {
+      return res.status(400).json({ error: 'Is that a Pokemon?' });
+    }
     const domoData = {
       name: result.name,
       wins: 0,
