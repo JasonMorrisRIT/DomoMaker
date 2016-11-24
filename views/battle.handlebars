@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+  <nav><a href="/login"><img id="logo" src="/assets/img/ball.png" alt="face logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
 		<div class="navlink"><a href="/world">World Page</a></div>
   </nav>
@@ -19,10 +19,9 @@
 			
 			{{#if tTeam}}
 			{{#each tTeam}}
-			<div class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
+			<div class="domo"><img src="/assets/img/{{this.path}}" alt="domo face" class="domoFace"/>
 				<h3 class="domoName">Name: {{this.name}}</h3>
-				<h3 class="domoAge"> Age: {{this.age}}</h3>
-				<h4 class="domoDate"> Date Joined: {{this.createdData}}</h4>
+				<h3 class="domoAge"> Wins: {{this.wins}}</h3>
 			</div>
 			{{/each}}
 			{{else}}
@@ -32,10 +31,10 @@
 			<h1>Your Team!</h1>
 			{{#if yTeam}}
 			{{#each yTeam}}
-			<div class="domo"><img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace"/>
+			<div class="domo"><img src="/assets/img/{{this.path}}" alt="domo face" class="domoFace"/>
 				<h3 class="domoName">Name: {{this.name}}</h3>
-				<h3 class="domoAge"> Age: {{this.age}}</h3>
-				<h4 class="domoDate"> Date Joined: {{this.createdData}}</h4>
+				<h3 class="domoAge"> Wins: {{this.wins}}</h3>
+				
 			</div>
 			{{/each}}
 			{{else}}
