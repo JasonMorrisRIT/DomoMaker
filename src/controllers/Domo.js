@@ -16,7 +16,7 @@ const makerPage = (req, res) => {
 
 const battlePage = (req, res) => {
  // Domo.DomoModel.findByOwner(req.session.account._id)/*.limit(6)*/.exec((erro, yTeam) => {
-  Domo.DomoModel.findByOwner(req.session.account._id).exec((erro, yTeamDocs) => {
+  Domo.DomoModel.findByOwner(req.session.account._id, (erro, yTeamDocs) => {
     if (erro) {
       console.log(erro);
       return res.status(400).json({ error: 'An error occurred' });
